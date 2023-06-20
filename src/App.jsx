@@ -1,11 +1,14 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-
+import { Physics } from "@react-three/rapier";
 function App() {
   return (
     <Canvas shadows camera={{ position: [3, 3, 3], fov: 30 }}>
       <color attach="background" args={["#ececec"]} />
-      <Experience />
+      <Physics>
+        <Experience />
+      </Physics>
+
     </Canvas>
   );
 }
