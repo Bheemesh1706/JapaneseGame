@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.3 ./public/models/toriGate.glb
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
+export function Tori(props) {
   const { nodes, materials } = useGLTF('./models/toriGate.glb')
   return (
     <group {...props} dispose={null}>
