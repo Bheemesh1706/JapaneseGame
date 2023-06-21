@@ -3,8 +3,8 @@ import { Experience } from "./components/Experience";
 import { Physics } from "@react-three/rapier";
 function App() {
   return (
-    <Canvas shadows camera={{ position: [3, 3, 3], fov: 30 }}>
-      <color attach="background" args={["#ececec"]} />
+    <Canvas shadows camera={{ position: [0, 6, 14], fov: 42 }}>
+      <color attach="background" args={["#dbecfb"]} />
       <Physics>
         <Experience />
       </Physics>
