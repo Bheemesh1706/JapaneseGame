@@ -1,10 +1,22 @@
-import { Cylinder, MeshReflectorMaterial, OrbitControls, Text3D } from "@react-three/drei";
+import { Cylinder, MeshReflectorMaterial, OrbitControls } from "@react-three/drei";
 import { CylinderCollider, RigidBody } from "@react-three/rapier";
 import { Tori } from "./ToriGate";
-import { kanas } from "../constants";
+import { useGameStore } from "../store";
+import { useEffect } from "react";
+import { KanaSpots } from "./KanaSpots";
+import { BlueRoboController } from "./BlueRoboController";
 export const Experience = () => {
+
+  const startGame = useGameStore((state)=>state.startGame);
+  
+
+  useEffect(()=>{
+    startGame();
+  },[]);
+
   return (
     <>
+
       <OrbitControls />
 
 
@@ -37,12 +49,10 @@ export const Experience = () => {
       <Tori scale={[16, 16, 16]} position={[0, 0, -22]} rotation-y={1.25 * Math.PI} />
       <Tori scale={[16, 16, 16]} position={[-8, 0, -20]} rotation-y={1.4 * Math.PI} />
       <Tori scale={[16, 16, 16]} position={[8, 0, -20]} rotation-y={Math.PI} />
-
+      {/*Character*/}
+      <BlueRoboController/>
       {/*Kana*/}
-      <Text3D font={"./font/Noto_JP_ExtraBold_Regular.json"} size={1}>
-       {kanas[0].characters.hiragana}
-       <meshNormalMaterial/>
-      </Text3D>
+      <KanaSpots/>
       {/*Stage*/}
       <group position-y={-2.5}>
         <RigidBody colliders={false} type="fixed" position-y={-0.5}>
