@@ -1,4 +1,4 @@
-# r3f-vite-starter
+# Japanese Game
 A boilerplate to build R3F projects
 
 ```
