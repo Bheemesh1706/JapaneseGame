@@ -5,6 +5,7 @@ import { useGameStore } from "../store";
 import { useEffect } from "react";
 import { KanaSpots } from "./KanaSpots";
 import { BlueRoboController } from "./BlueRoboController";
+
 export const Experience = () => {
 
   const startGame = useGameStore((state)=>state.startGame);
@@ -55,7 +56,7 @@ export const Experience = () => {
       <KanaSpots/>
       {/*Stage*/}
       <group position-y={-2.5}>
-        <RigidBody colliders={false} type="fixed" position-y={-0.5}>
+        <RigidBody colliders={false} type="fixed" position-y={-0.5} friction={2}>
           <CylinderCollider args={[1 / 2, 5]} />
           <Cylinder scale={[5, 1, 5]} receiveShadow>
             <meshStandardMaterial color={"white"} />
