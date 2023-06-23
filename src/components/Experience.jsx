@@ -14,7 +14,7 @@ export const Experience = () => {
         position={[5, 5, 5]}
         intensity={0.8}
         castShadow
-        color={"9e69da"}
+        color={"#9e69da"}
       />
 
       {/**Background */}
@@ -28,7 +28,7 @@ export const Experience = () => {
           mixStrength={15}
           depthScale={1}
           minDepthThreshold={.85}
-          color={"dbecfb"}
+          color={"#dbecfb"}
           metalness={0.6}
           roughness={1}
         />
@@ -39,8 +39,9 @@ export const Experience = () => {
       <Tori scale={[16, 16, 16]} position={[8, 0, -20]} rotation-y={Math.PI} />
 
       {/*Kana*/}
-      <Text3D font={"./font/japaneseFont.json"} size={1}>
+      <Text3D font={"./font/Noto_JP_ExtraBold_Regular.json"} size={1}>
        {kanas[0].characters.hiragana}
+       <meshNormalMaterial/>
       </Text3D>
       {/*Stage*/}
       <group position-y={-2.5}>
