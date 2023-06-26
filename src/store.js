@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { kanas } from "./constants";
 
+export const gameStates ={
+    MENU:"MENU",
+    GAME:"GAME",
+    GAME_OVER:"GAME_OVER"
+}
+
 export const generateGameLevel = ({nbStages}) =>{
     const level =[];
 
@@ -28,10 +34,11 @@ export const useGameStore = create ((set)=>({
     currentStage: 0,
     currentKana: null,
     mode: "hiragana",
-    startGame: ()=>{
+    gameState:gameStates.MENU,
+    startGame: ({mode})=>{
         const level = generateGameLevel({nbStages:5});
         const currentKana = level[0].find(((kana)=>kana.correct));
-        set({level,currentStage:0,currentKana});
+        set({level,currentStage:0,currentKana,gameState:gameStates.GAME,mode});
     },
     nextStage: ()=>{
         set((state)=>{

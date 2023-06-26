@@ -3,7 +3,7 @@ import { Experience } from "./components/Experience";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useMemo } from "react";
 import { KeyboardControls } from "@react-three/drei";
-
+import { Menu } from "./components/Menu";
 export const Controls = {
   forward: "forward",
   back: "back",
@@ -32,6 +32,7 @@ function App() {
           </Physics>
         </Suspense>
       </Canvas>
+      <Menu/>
     </KeyboardControls>
   );
 }
