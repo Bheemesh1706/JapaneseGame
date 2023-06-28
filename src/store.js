@@ -12,7 +12,7 @@ export const generateGameLevel = ({nbStages}) =>{
 
     for(var i=0 ;i<nbStages; i++ )
     { const stage =[];
-      const nbOptions=3+1;
+      const nbOptions=3+i;
       for(let j=0;j<nbOptions;j++)
       {
         let kana =null;

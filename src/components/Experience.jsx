@@ -1,5 +1,5 @@
 import { Cylinder, MeshReflectorMaterial, OrbitControls } from "@react-three/drei";
-import { CylinderCollider, RigidBody } from "@react-three/rapier";
+import { CuboidCollider, CylinderCollider, RigidBody } from "@react-three/rapier";
 import { Tori } from "./ToriGate";
 import { KanaSpots } from "./KanaSpots";
 import { BlueRoboController } from "./BlueRoboController";
@@ -9,9 +9,7 @@ export const Experience = () => {
 
   return (
     <>
-
       <OrbitControls />
-
 
       {/*Lights*/}
       <ambientLight intensity={1} />
@@ -22,39 +20,54 @@ export const Experience = () => {
         color={"#9e69da"}
       />
 
-      {/**Background */}
-
-      <mesh position={[0, -3.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[50, 50]} />
-        <MeshReflectorMaterial
-          blur={[400, 400]}
-          resolution={1024}
-          mixBlur={1}
-          mixStrength={15}
-          depthScale={1}
-          minDepthThreshold={.85}
-          color={"#dbecfb"}
-          metalness={0.6}
-          roughness={1}
-        />
-      </mesh>
 
       <Tori scale={[16, 16, 16]} position={[0, 0, -22]} rotation-y={1.25 * Math.PI} />
       <Tori scale={[16, 16, 16]} position={[-8, 0, -20]} rotation-y={1.4 * Math.PI} />
       <Tori scale={[16, 16, 16]} position={[8, 0, -20]} rotation-y={Math.PI} />
-      {/*Character*/}
-      <BlueRoboController />
-      {/*Kana*/}
-      <KanaSpots />
-      {/*Stage*/}
-      <group position-y={-2.5}>
-        <RigidBody colliders={false} type="fixed" position-y={-0.5} friction={2}>
+
+        {/**Background */}
+      <RigidBody colliders={false} type="fixed" name="void"  >
+        <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[50, 50]} />
+          <MeshReflectorMaterial
+            blur={[400, 400]}
+            resolution={1024}
+            mixBlur={1}
+            mixStrength={15}
+            depthScale={1}
+            minDepthThreshold={.85}
+            color={"#dbecfb"}
+            metalness={0.6}
+            roughness={1}
+          />
+          <CuboidCollider position={[0, -3.5, 0]} args={[50, 0.1, 50]} sensor />
+        </mesh>
+      </RigidBody>
+
+      <group position-y={-1}>
+
+        {/* STAGE */}
+        <RigidBody
+          colliders={false}
+          type="fixed"
+          position-y={-0.5}
+          friction={2}
+        >
           <CylinderCollider args={[1 / 2, 5]} />
           <Cylinder scale={[5, 1, 5]} receiveShadow>
-            <meshStandardMaterial color={"white"} />
+            <meshStandardMaterial color="white" />
           </Cylinder>
         </RigidBody>
+
+        {/*Character*/}
+        <BlueRoboController />
+
+        {/* KANA */}
+        <KanaSpots />
       </group>
+
+  
+
     </>
   );
 };
