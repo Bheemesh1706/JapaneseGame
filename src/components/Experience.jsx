@@ -1,17 +1,18 @@
-import { Cylinder, MeshReflectorMaterial, OrbitControls } from "@react-three/drei";
+import { Cylinder, MeshReflectorMaterial, OrbitControls,Text } from "@react-three/drei";
 import { CuboidCollider, CylinderCollider, RigidBody } from "@react-three/rapier";
 import { Tori } from "./ToriGate";
 import { KanaSpots } from "./KanaSpots";
 import { BlueRoboController } from "./BlueRoboController";
+import { useGameStore } from "../store";
 
 export const Experience = () => {
 
+  const currentKana = useGameStore((state) => state.currentKana);
 
   return (
     <>
       <OrbitControls />
-
-      {/*Lights*/}
+      {/* LIGHTS */}
       <ambientLight intensity={1} />
       <directionalLight
         position={[5, 5, 5]}
@@ -20,13 +21,9 @@ export const Experience = () => {
         color={"#9e69da"}
       />
 
+      {/* BACKGROUND */}
 
-      <Tori scale={[16, 16, 16]} position={[0, 0, -22]} rotation-y={1.25 * Math.PI} />
-      <Tori scale={[16, 16, 16]} position={[-8, 0, -20]} rotation-y={1.4 * Math.PI} />
-      <Tori scale={[16, 16, 16]} position={[8, 0, -20]} rotation-y={Math.PI} />
-
-        {/**Background */}
-      <RigidBody colliders={false} type="fixed" name="void"  >
+      <RigidBody colliders={false} type="fixed" name="void">
         <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[50, 50]} />
           <MeshReflectorMaterial
@@ -35,17 +32,35 @@ export const Experience = () => {
             mixBlur={1}
             mixStrength={15}
             depthScale={1}
-            minDepthThreshold={.85}
-            color={"#dbecfb"}
+            minDepthThreshold={0.85}
+            color="#dbecfb"
             metalness={0.6}
             roughness={1}
           />
-          <CuboidCollider position={[0, -3.5, 0]} args={[50, 0.1, 50]} sensor />
         </mesh>
+        <CuboidCollider position={[0, -3.5, 0]} args={[50, 0.1, 50]} sensor />
       </RigidBody>
 
-      <group position-y={-1}>
+      <Tori
+        scale={[16, 16, 16]}
+        position={[0, 0, -22]}
+        rotation-y={1.25 * Math.PI}
+      />
+      {currentKana && (
+        <Text position={[0, -1, -20]} fontSize={0.82}>
+          {currentKana.name.toUpperCase()}
+          <meshStandardMaterial color={"black"} opacity={0.6} transparent />
+        </Text>
+      )}
+      <Tori
+        scale={[10, 10, 10]}
+        position={[-8, 0, -20]}
+        rotation-y={1.4 * Math.PI}
+      />
+      <Tori scale={[10, 10, 10]} position={[8, 0, -20]} rotation-y={Math.PI} />
 
+      <group position-y={-1}>
+        
         {/* STAGE */}
         <RigidBody
           colliders={false}
@@ -59,16 +74,14 @@ export const Experience = () => {
           </Cylinder>
         </RigidBody>
 
-        {/*Character*/}
+        {/* CHARACTER */}
         <BlueRoboController />
 
         {/* KANA */}
         <KanaSpots />
       </group>
-
-  
-
     </>
   );
+
 };
 

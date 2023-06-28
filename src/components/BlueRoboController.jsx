@@ -74,15 +74,12 @@ export const BlueRoboController = () => {
           onIntersectionEnter={({ other }) => {
             if (other.rigidBodyObject.name === "void") {
               resetPosition();
-              playAudio("fall", () => {
-                playAudio("ganbatte");
-              });
             }
           }}
         >
-          <CapsuleCollider args={[0.8, 0.4]} position={[0, 1.2, 0]} />
+          <CapsuleCollider args={[0.8, 0.4]} position={[0, 0, 0]} />
           <group ref={robo}>
-            <Character />
+            <BlueRobo/>
           </group>
         </RigidBody>
       </group>)
