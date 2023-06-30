@@ -33,6 +33,7 @@ export const useGameStore = create ((set)=>({
     level: null,
     currentStage: 0,
     currentKana: null,
+    touchedKana:null,
     mode: "hiragana",
     gameState:gameStates.MENU,
     startGame: ({mode})=>{
@@ -42,9 +43,13 @@ export const useGameStore = create ((set)=>({
     },
     nextStage: ()=>{
         set((state)=>{
-            const currentStage = state.currentStage+1;
-            const currentKana = state.level[currentStage].find((kana)=>kana.correct);
+            const currentStage = state?.currentStage+1;
+            const currentKana = state?.level[currentStage].find((kana)=>kana.correct);
             return {currentStage,currentKana}
         })
+    },
+    currentTouch: ({touchedKana})=>{
+      set({touchedKana})
     }
+    
 }))
